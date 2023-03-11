@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weather App</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+        form {
+            margin-top: 50px;
+            text-align: center;
+        }
+        input[type="text"] {
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            margin-right: 10px;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+        .weather {
+            margin-top: 50px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 36px;
+            font-weight: bold;
+            margin-top: 0;
+        }
+        h2 {
+            font-size: 24px;
+            margin-top: 0;
+        }
+        .temperature {
+            font-size: 72px;
+            margin-top: 20px;
+        }
+        .description {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+        img {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+   <form method="post" action="/">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+        <label for="city">Enter a city:</label>
+        <input type="text" id="city" name="city" placeholder="City">
+        <input type="submit" value="Get Weather">
+    </form>
+
+    {% if weather_data %}
+        <div class="weather">
+            <h1>{{ weather_data.city }}</h1>
+            <h2>{{ weather_data.temperature }}&deg;F</h2>
+
+        <div class="description">
+            <img src="{{ weather_data.icon }}" alt="Weather Icon" width="80" height="80" style="vertical-align: middle; margin-bottom: 25px;">
+            {{ weather_data.description }}
+        </div>
+
+            <img src="{{ url_for('static', filename='Luffy.png') }}" alt="Luffy in his natural state" width="400 height="450">
+            <p>Don't use it too many times otherwise my free weather API will be capped :(</p>
+            <p>Picture from KyokoVinyl</p>
+            <p>Powered by <a href="https://www.weatherapi.com/" title="Free Weather API">WeatherAPI.com</a></p>
+        </div>
+    {% endif %}
+</body>
+</html>
